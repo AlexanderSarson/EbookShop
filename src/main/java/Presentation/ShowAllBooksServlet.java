@@ -38,7 +38,7 @@ public class ShowAllBooksServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         IEbookMapper mapper = new EbookMapper();
         List<Ebook> ebooks = mapper.getAllEbooks();
-        String ebookForms = Collection2Html.ebookList2HtmlTable(ebooks);
+        String ebookHtmlTable = Collection2Html.ebookList2HtmlTable(ebooks);
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -48,7 +48,7 @@ public class ShowAllBooksServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ShowAllBooksServlet at " + request.getContextPath() + "</h1>");
-            out.println(ebookForms);
+            out.println(ebookHtmlTable);
             out.println("</body>");
             out.println("</html>");
         }
