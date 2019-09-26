@@ -6,17 +6,41 @@
 package Persistence;
 
 import Business.Ebook;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Alex
  */
-public class EbookMapper implements IEbookMapper{
+public class EbookMapper implements IEbookMapper {
 
     @Override
     public List<Ebook> getAllEbooks() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM ebooks";
+        List<Ebook> ebooks = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            rs = DB.getConnection().prepareStatement(sql).executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Ebook ebook = null;
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("ebook_id");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                int price = rs.getInt("price");
+                ebook = new Ebook(id, title, author, price);
+                ebooks.add(ebook);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ebooks;
     }
 
     @Override
@@ -29,4 +53,9 @@ public class EbookMapper implements IEbookMapper{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public static void main(String[] args) {
+        EbookMapper mapper = new EbookMapper();
+        List<Ebook> books = mapper.getAllEbooks();
+    }
+
 }

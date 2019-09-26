@@ -5,6 +5,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Welcome to my ebookshop</h1>
+        <form action="ShowAllBooksServlet">
+            <input type="submit" value="Show all books" />
+        </form>
+        <br>
+        <br>
+        <form action="GetbookByTitleServlet">
+            Type in book title<input type="text" name="bookTitle" value="" />
+            <input type="submit" value="Search" />
+        </form>
+        <br>
+        <br>
+        <form action="GetBookByPartOfTitleServlet">
+            Type in part of book title<input type="text" name="partBookTitle" value="" />
+            <input type="submit" value="Search" />
+        </form>
     </body>
 </html>
