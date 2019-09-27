@@ -5,6 +5,10 @@
  */
 package Presentation;
 
+import Business.Collection2Html;
+import Business.Ebook;
+import Persistence.EbookMapper;
+import Persistence.IEbookMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,6 +35,15 @@ public class GetBookByTitleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        IEbookMapper mapper = new EbookMapper();
+        String title = request.getParameter("bookTitle");
+        Ebook ebook = mapper.getEbookByTitle(title);
+        String ebookHtmlForm = "";
+        if(ebook != null){
+            ebookHtmlForm = Collection2Html.ebook2HtmlForm(ebook);
+        } else {
+            ebookHtmlForm = "no ebook found by that name. try again";
+        }
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -40,6 +53,7 @@ public class GetBookByTitleServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet GetBookByTitleServlet at " + request.getContextPath() + "</h1>");
+            out.println(ebookHtmlForm);
             out.println("</body>");
             out.println("</html>");
         }

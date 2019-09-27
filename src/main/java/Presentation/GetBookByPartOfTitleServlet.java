@@ -5,8 +5,13 @@
  */
 package Presentation;
 
+import Business.Collection2Html;
+import Business.Ebook;
+import Persistence.EbookMapper;
+import Persistence.IEbookMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +36,20 @@ public class GetBookByPartOfTitleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        IEbookMapper mapper = new EbookMapper();
+        String title = request.getParameter("partBookTitle");
+        List<Ebook> ebooks = mapper.searchPartOfEbookTitle(title);
+        String ebookHtmlForm = "";
+        switch (ebooks.size()){
+            case 0:
+                ebookHtmlForm = "no ebook found by that name. try again";
+                break;
+            case 1:
+                ebookHtmlForm = Collection2Html.ebook2HtmlForm(ebooks.get(0));
+                break;
+            default:
+                ebookHtmlForm = Collection2Html.ebookList2HtmlForm(ebooks);
+        }
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -40,6 +59,7 @@ public class GetBookByPartOfTitleServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet GetBookByPartOfTitleServlet at " + request.getContextPath() + "</h1>");
+            out.println(ebookHtmlForm);
             out.println("</body>");
             out.println("</html>");
         }
