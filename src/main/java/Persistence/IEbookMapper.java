@@ -16,4 +16,5 @@ public interface IEbookMapper {
     public List<Ebook> getAllEbooks();
     public Ebook getEbookByTitle(String title);
     public List<Ebook> searchPartOfEbookTitle(String title);
+    public Ebook getEbookByID(int id);
 }

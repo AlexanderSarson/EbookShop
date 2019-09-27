@@ -7,6 +7,7 @@ package Presentation;
 
 import Business.Collection2Html;
 import Business.Ebook;
+import Business.ShoppingCart;
 import Persistence.EbookMapper;
 import Persistence.IEbookMapper;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,6 +38,15 @@ public class ShowAllBooksServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(true);
+        ShoppingCart cart;
+        synchronized (session) {
+            cart = (ShoppingCart) session.getAttribute("shoppingCart");
+            if (cart == null) {  // No cart, create one.
+                cart = new ShoppingCart();
+                session.setAttribute("shoppingCart", cart);  // Save it into session
+            }
+        }
         IEbookMapper mapper = new EbookMapper();
         List<Ebook> ebooks = mapper.getAllEbooks();
         String ebookHtmlTable = Collection2Html.ebookList2HtmlTable(ebooks);

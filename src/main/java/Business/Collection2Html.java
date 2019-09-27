@@ -30,14 +30,14 @@ public class Collection2Html {
     }
     
     public static String ebook2HtmlForm(Ebook ebook){
-        String out = "<form method=\"get\" action=\"OrderServlet\">";
-        out += "<table border=\"1\" cellpadding=\"10\"><thead><tr><th> </th><th>title</th><th>author</th><th>price</th></tr></thead><tbody>";
+        String out = "<form method=\"get\" action=\"ShoppingCardServlet\">";
+        out += "<table border=\"1\" cellpadding=\"10\"><thead><tr><th> </th><th>title</th><th>author</th><th>price</th><th>qty</th></tr></thead><tbody>";
         out += "<tr><td><input type='checkbox' name='id' value="
                 + "'" +ebook.getId() + "' /></td><td>"
                 + ebook.getTitle() +"</td><td>"
                 + ebook.getAuthor() + "</td><td>$"
-                + ebook.getPrice() + "</td>";
-        
+                + ebook.getPrice() + "</td><td>"
+                + "<input type=\"number\" maxlength=\"2\" size=\"2\" name=\"" + ebook.getId() + "qty\" value=\"\" /></td>";
         out += "</tr>";
         out += "</tbody></table>";
         out += "<input type='submit' value='ORDER' />";
@@ -46,14 +46,15 @@ public class Collection2Html {
     }
     
     public static String ebookList2HtmlForm(List<Ebook> ebooks){
-        String out = "<form method=\"get\" action=\"OrderServlet\">";
-        out += "<table border=\"1\" cellpadding=\"10\"><thead><tr><th> </th><th>title</th><th>author</th><th>price</th></tr></thead><tbody>";
+        String out = "<form method=\"get\" action=\"ShoppingCardServlet\">";
+        out += "<table border=\"1\" cellpadding=\"10\"><thead><tr><th> </th><th>title</th><th>author</th><th>price</th><th>qty</th></tr></thead><tbody>";
         for (Ebook ebook : ebooks) {
              out += "<tr><td><input type='checkbox' name='id' value="
                 + "'" +ebook.getId() + "' /></td><td>"
                 + ebook.getTitle() +"</td><td>"
                 + ebook.getAuthor() + "</td><td>$"
-                + ebook.getPrice() + "</td>";
+                + ebook.getPrice() + "</td><td>"
+                + "<input type=\"number\" maxlength=\"2\" size=\"2\" name=\"" + ebook.getId() + "qty\" value=\"\" /></td>";
         }
         out += "</tr>";
         out += "</tbody></table>";

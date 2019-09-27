@@ -97,6 +97,32 @@ public class EbookMapper implements IEbookMapper {
         return ebooks;
     }
     
+    @Override
+    public Ebook getEbookByID(int id) {
+        String sql = "SELECT * FROM ebooks where ebook_id = ?";
+        ResultSet rs = null;
+        try {
+            PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Ebook ebook = null;
+        try {
+            while (rs.next()) {
+                int bookId = rs.getInt("ebook_id");
+                String bookTitle = rs.getString("title");
+                String author = rs.getString("author");
+                int price = rs.getInt("price");
+                ebook = new Ebook(bookId, bookTitle, author, price);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ebook;
+    }
+
     public static void main(String[] args) {
         EbookMapper mapper = new EbookMapper();
         List<Ebook> ebooks = new ArrayList<>();
