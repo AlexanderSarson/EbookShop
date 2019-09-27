@@ -19,7 +19,7 @@ public class ShoppingCart {
     public ShoppingCart() {
         this.cart = new ArrayList<>();
     }
-
+    
     public List<Ebook> getShoppingCard() {
         return cart;
     }
@@ -30,7 +30,7 @@ public class ShoppingCart {
 
     public void addEbook(Ebook ebook) {
         for (Ebook book : cart) {
-            if (book.getId() == ebook.getId()) {
+            if(book.equals(ebook)) {
                 int qty = book.getQty() + ebook.getQty();
                 book.setQty(qty);
                 return;

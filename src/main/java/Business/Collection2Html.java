@@ -22,6 +22,20 @@ public class Collection2Html {
         return out;
     }
     
+    public static String ebookList2HtmlTableShop(List<Ebook> ebooks){
+        String out = "<table border=\"1\" cellpadding=\"10\"><thead><tr><th>title</th><th>author</th><th>price</th><th>qty</th></tr></thead><tbody>";
+        int price = 0;
+        for (Ebook ebook : ebooks) {
+            out += " <tr><td>"+ebook.getTitle()+"</td><td>"+ebook.getAuthor()+"</td><td>"+ebook.getPrice()+"</td><td>"+ebook.getQty()+"</td></tr>";
+            price += ebook.getPrice() * ebook.getQty();
+        }
+        out += "</tbody></table>";
+        out += "<table border=\"2\" cellpadding=\"20\"><thead><tr><th>totalprice</th></tr></thead><tbody>";
+        out += " <tr><td>"+price+"</td></tr>";
+        out += "</tbody></table>";
+        return out;
+    }
+    
     public static String ebook2HtmlTable(Ebook ebook){
         String out = "<table border=\"1\" cellpadding=\"10\"><thead><tr><th>id</th><th>title</th><th>author</th><th>price</th></tr></thead><tbody>";
         out += " <tr><td>"+ebook.getId()+"</td><td>"+ebook.getTitle()+"</td><td>"+ebook.getAuthor()+"</td><td>"+ebook.getPrice()+"</td></tr>";
