@@ -41,9 +41,9 @@ public class OrderServlet extends HttpServlet {
         ShoppingCart cart;
         synchronized (session) {
             cart = (ShoppingCart) session.getAttribute("shoppingCart");
-            if (cart == null) {  // No cart, create one.
+            if (cart == null) { 
                 cart = new ShoppingCart();
-                session.setAttribute("shoppingCart", cart);  // Save it into session
+                session.setAttribute("shoppingCart", cart); 
             }
         }
         CustomerMapper cust_map = new CustomerMapper();
@@ -56,7 +56,7 @@ public class OrderServlet extends HttpServlet {
         Order order = new Order(cust,cart);
         OrderMapper order_map = new OrderMapper();
         order_map.createOrder(order);
-        cart = null;
+        session.removeAttribute("shoppingCart");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

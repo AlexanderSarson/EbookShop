@@ -15,8 +15,9 @@ import java.sql.SQLException;
  */
 public class DB {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/ebookshop";
-    private static final String USER = "dev";
+    //private static final String URL = "jdbc:mysql://localhost:3306/ebookshop";
+    private static final String URL = "jdbc:mysql://cphbusinessmysql.mysql.database.azure.com:3306/ebookshop?useSSL=true&requireSSL=false&serverTimezone=UTC";
+    private static final String USER = "dev@cphbusinessmysql";
     private static final String PASSWORD = "dev";
     
     public static Connection conn = null;

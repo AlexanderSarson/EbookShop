@@ -5,8 +5,6 @@
  */
 package Persistence;
 
-import Business.Ebook;
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

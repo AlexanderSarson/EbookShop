@@ -41,9 +41,9 @@ public class ShoppingCardServlet extends HttpServlet {
         ShoppingCart cart;
         synchronized (session) {
             cart = (ShoppingCart) session.getAttribute("shoppingCart");
-            if (cart == null) {  // No cart, create one.
+            if (cart == null) {  
                 cart = new ShoppingCart();
-                session.setAttribute("shoppingCart", cart);  // Save it into session
+                session.setAttribute("shoppingCart", cart);
             }
         }
         IEbookMapper mapper = new EbookMapper();

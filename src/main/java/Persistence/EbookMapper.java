@@ -126,7 +126,7 @@ public class EbookMapper implements IEbookMapper {
     public static void main(String[] args) {
         EbookMapper mapper = new EbookMapper();
         List<Ebook> ebooks = new ArrayList<>();
-        ebooks = mapper.searchPartOfEbookTitle("har");
+        ebooks = mapper.getAllEbooks();
         System.out.println(ebooks.get(0).getTitle());
     }
 
