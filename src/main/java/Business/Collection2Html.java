@@ -11,6 +11,7 @@ import java.util.List;
  *
  * @author Alex
  */
+
 public class Collection2Html {
     
     public static String ebookList2HtmlTable(List<Ebook> ebooks){
